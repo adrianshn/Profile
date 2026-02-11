@@ -1,236 +1,128 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portofolio pribadi Adrian Sanyakob Siahaan, mahasiswa USU di Program Studi Perpustakaan dan Sains Informasi. Jelajahi proyek, tentang saya, dan cara menghubungi.">
-    <meta name="keywords" content="Adrian Sanyakob Siahaan, USU, Perpustakaan dan Sains Informasi, portofolio, proyek web">
-    <meta name="author" content="Adrian Sanyakob Siahaan">
-    <title>Adrian Sanyakob Siahaan - Portofolio Pribadi</title>
-    <style>
-        /* Styling sederhana untuk membuatnya terlihat rapi dan responsif */
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            line-height: 1.6; 
-            color: #333; 
-            background-color: #f9f9f9; 
-            transition: background-color 0.3s ease; 
-        }
-        header { 
-            background: linear-gradient(135deg, #007bff, #0056b3); 
-            padding: 1rem; 
-            text-align: center; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-        }
-        nav ul { 
-            list-style: none; 
-            padding: 0; 
-            display: flex; 
-            justify-content: center; 
-            flex-wrap: wrap; 
-        }
-        nav ul li { 
-            display: inline; 
-            margin: 0 1rem; 
-        }
-        nav a { 
-            text-decoration: none; 
-            color: white; 
-            font-weight: bold; 
-            padding: 0.5rem; 
-            border-radius: 5px; 
-            transition: background-color 0.3s ease; 
-        }
-        nav a:hover, nav a:focus { 
-            background-color: rgba(255, 255, 255, 0.2); 
-            outline: 2px solid white; 
-        }
-        section { 
-            padding: 2rem; 
-            max-width: 800px; 
-            margin: 0 auto; 
-            background: white; 
-            margin-bottom: 1rem; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
-        }
-        .hero { 
-            background: linear-gradient(135deg, #007bff, #0056b3); 
-            color: white; 
-            text-align: center; 
-            padding: 3rem 1rem; 
-            animation: fadeIn 1s ease-in; 
-        }
-        @keyframes fadeIn { 
-            from { opacity: 0; transform: translateY(-20px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        .projects { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 1rem; 
-        }
-        .project { 
-            border: 1px solid #ddd; 
-            padding: 1rem; 
-            width: calc(50% - 1rem); 
-            box-sizing: border-box; 
-            background: #f8f9fa; 
-            border-radius: 5px; 
-            transition: transform 0.3s ease; 
-        }
-        .project:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
-        }
-        .project a { 
-            color: #007bff; 
-            font-weight: bold; 
-        }
-        form { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 1rem; 
-        }
-        input, textarea { 
-            padding: 0.5rem; 
-            border: 1px solid #ddd; 
-            border-radius: 5px; 
-            font-family: inherit; 
-        }
-        input:focus, textarea:focus { 
-            outline: 2px solid #007bff; 
-            border-color: #007bff; 
-        }
-        button { 
-            padding: 0.5rem; 
-            background: #007bff; 
-            color: white; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            transition: background-color 0.3s ease; 
-        }
-        button:hover, button:focus { 
-            background: #0056b3; 
-            outline: 2px solid #007bff; 
-        }
-        footer { 
-            background: #f4f4f4; 
-            text-align: center; 
-            padding: 1rem; 
-            color: #666; 
-        }
-        /* Responsivitas untuk mobile */
-        @media (max-width: 768px) {
-            nav ul { flex-direction: column; }
-            nav ul li { margin: 0.5rem 0; }
-            .projects { flex-direction: column; }
-            .project { width: 100%; }
-            section { padding: 1rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Egan Library</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background-image: url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da");
+    background-size: cover;
+    background-position: center;
+    color:white;
+}
+
+.overlay{
+    background-color: rgba(0,0,0,0.65);
+    min-height:100vh;
+}
+
+nav{
+    background-color: rgba(0,0,0,0.8);
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.container{
+    padding:40px;
+    max-width:900px;
+    margin:auto;
+}
+
+.section{
+    display:none;
+}
+
+.active{
+    display:block;
+}
+
+h1,h2{
+    text-align:center;
+}
+
+.link-box{
+    text-align:center;
+    margin-top:25px;
+}
+
+.link-box a{
+    display:block;
+    margin:10px;
+    color:#ffd700;
+    font-size:18px;
+    text-decoration:none;
+}
+</style>
+
+<script>
+function showMenu(menu){
+    document.querySelectorAll('.section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+    document.getElementById(menu).classList.add('active');
+}
+</script>
+
 </head>
+
 <body>
-    <!-- Navigasi dengan atribut aksesibilitas -->
-    <header role="banner">
-        <nav role="navigation" aria-label="Navigasi utama">
-            <ul>
-                <li><a href="#home" aria-label="Pergi ke bagian Home">Home</a></li>
-                <li><a href="#about" aria-label="Pergi ke bagian About">About</a></li>
-                <li><a href="#projects" aria-label="Pergi ke bagian Projects">Projects</a></li>
-                <li><a href="#contact" aria-label="Pergi ke bagian Contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<div class="overlay">
 
-    <!-- Hero Section dengan atribut untuk aksesibilitas -->
-    <section id="home" class="hero" role="main" aria-labelledby="hero-title">
-        <h1 id="hero-title">Adrian Sanyakob Siahaan</h1>
-        <p>Mahasiswa USU - Program Studi Perpustakaan dan Sains Informasi</p>
-    </section>
+<nav>
+<a href="#" onclick="showMenu('dashboard')">Dashboard</a>
+<a href="#" onclick="showMenu('katalog')">Katalog</a>
+<a href="#" onclick="showMenu('kegiatan')">Kegiatan Literasi</a>
+</nav>
 
-    <!-- About Section dengan deskripsi lebih lengkap -->
-    <section id="about" aria-labelledby="about-title">
-        <h2 id="about-title">About</h2>
-        <p>Saya Adrian Sanyakob Siahaan, mahasiswa aktif di Universitas Sumatera Utara (USU) dengan NIM 230709058. Saya mengambil program studi Perpustakaan dan Sains Informasi di Fakultas Ilmu Budaya. Saya memiliki minat besar dalam pengembangan web, manajemen informasi, dan teknologi perpustakaan modern. Melalui studi saya, saya belajar tentang pengorganisasian data, sistem informasi, dan inovasi digital untuk mendukung akses pengetahuan.</p>
-        <p>Selain akademik, saya aktif dalam proyek-proyek praktis yang melibatkan teknologi web dan informasi. Saya percaya bahwa kombinasi antara pengetahuan perpustakaan dan keterampilan teknis dapat menciptakan solusi inovatif untuk tantangan informasi di era digital.</p>
-    </section>
+<div class="container">
 
-    <!-- Projects Section dengan deskripsi lebih detail -->
-    <section id="projects" aria-labelledby="projects-title">
-        <h2 id="projects-title">Projects</h2>
-        <div class="projects">
-            <div class="project" role="article" aria-labelledby="project1-title">
-                <h3 id="project1-title">Proyek 1: Pengembangan WEB</h3>
-                <p>Dosen Pembimbing: Himma Dewiyana ST., M.Hum.</p>
-                <p>Proyek ini fokus pada pembuatan website responsif menggunakan HTML, CSS, dan JavaScript. Saya mengembangkan halaman web sederhana dengan navigasi, konten dinamis, dan integrasi form. Proyek ini membantu saya memahami dasar-dasar pengembangan front-end dan prinsip desain UX/UI.</p>
-                <a href="#" aria-label="Lihat detail proyek 1" rel="noopener noreferrer">Lihat Detail</a>
-            </div>
-            <div class="project" role="article" aria-labelledby="project2-title">
-                <h3 id="project2-title">Proyek 2: Pengembangan WEB Praktik</h3>
-                <p>Dosen Pembimbing: Himma Dewiyana ST., M.Hum.</p>
-                <p>Proyek praktis ini melibatkan pengembangan aplikasi web interaktif dengan fokus pada backend sederhana menggunakan PHP atau Node.js. Saya membuat sistem manajemen konten dasar, termasuk database untuk menyimpan data pengguna. Ini memperdalam pemahaman saya tentang full-stack development dan keamanan web.</p>
-                <a href="#" aria-label="Lihat detail proyek 2" rel="noopener noreferrer">Lihat Detail</a>
-            </div>
-        </div>
-    </section>
+<div id="dashboard" class="section active">
+<h1>Egan Library</h1>
+<p style="text-align:center;">Selamat datang di perpustakaan pribadi Egan.</p>
 
-    <!-- Contact Section dengan form yang lebih aksesibel -->
-    <section id="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title">Contact</h2>
-        <form action="/submit" method="post" role="form" aria-describedby="contact-description">
-            <p id="contact-description">Isi form di bawah untuk mengirim pesan kepada saya. Semua field wajib diisi.</p>
-            <label for="name">Nama:</label>
-            <input type="text" id="name" name="name" placeholder="Masukkan nama lengkap Anda" required autocomplete="name" aria-required="true">
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="contoh@email.com" required autocomplete="email" aria-required="true">
-            
-            <label for="message">Pesan:</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tulis pesan Anda di sini..." required aria-required="true"></textarea>
-            
-            <button type="submit" aria-label="Kirim pesan">Kirim Pesan</button>
-        </form>
-        <p>Atau hubungi saya langsung di <a href="mailto:adriansanyakobsiahaan@gmail.com" aria-label="Kirim email ke Adrian">adriansanyakobsiahaan@gmail.com</a> atau ikuti saya di Instagram <a href="https://www.instagram.com/adrian.siahaan_____" target="_blank" rel="noopener noreferrer" aria-label="Kunjungi profil Instagram Adrian">@adrian.siahaan_____</a>.</p>
-    </section>
+<div class="link-box">
+<a href="https://www.facebook.com/profile.php?id=61575099244106" target="_blank">
+Link Facebook
+</a>
 
-    <!-- Footer dengan informasi tambahan -->
-    <footer role="contentinfo">
-        <p>&copy; 2023 Adrian Sanyakob Siahaan. Fakultas Ilmu Budaya, Universitas Sumatera Utara. Semua hak dilindungi.</p>
-    </footer>
+<a href="https://drive.google.com/drive/folders/1cDexwHhdxwij8-Lq1sXUS5BwzS5ZeK61?hl=id" target="_blank">
+Curiculum Vitae
+</a>
+</div>
 
-    <!-- JavaScript sederhana untuk smooth scrolling dan validasi form -->
-    <script>
-        // Smooth scrolling untuk navigasi
-        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+</div>
 
-        // Validasi form sederhana
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function (e) {
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-            if (!name || !email || !message) {
-                alert('Harap isi semua field yang diperlukan.');
-                e.preventDefault();
-            } else if (!/\S+@\S+\.\S+/.test(email)) {
-                alert('Harap masukkan email yang valid.');
-                e.preventDefault();
-            } else {
-                alert('Pesan berhasil dikirim! (Ini simulasi; ganti dengan backend nyata.)');
-            }
-        });
-    </script>
+<div id="katalog" class="section">
+<h2>Daftar Buku</h2>
+<ul>
+<li>Manajemen Perpustakaan Modern</li>
+<li>Digital Library Concepts</li>
+<li>Literasi Informasi untuk Mahasiswa</li>
+</ul>
+</div>
+
+<div id="kegiatan" class="section">
+<h2>Kegiatan Literasi</h2>
+<ul>
+<li>Program Pojok Literasi</li>
+<li>Sosialisasi Digitalisasi Arsip</li>
+<li>Diskusi Buku Mingguan</li>
+</ul>
+</div>
+
+</div>
+</div>
+
 </body>
 </html>
