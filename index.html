@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Egan Library</title>
+<title>Profil Egan - Pustakawan dan Pecinta Buku</title>
 
 <style>
 body {
@@ -24,6 +24,18 @@ nav{
     background-color: rgba(0,0,0,0.8);
     padding:15px;
     text-align:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav .logo {
+    margin-right: 20px;
+}
+
+nav .logo img {
+    height: 50px;
+    width: auto;
 }
 
 nav a{
@@ -31,6 +43,11 @@ nav a{
     margin:0 15px;
     text-decoration:none;
     font-weight:bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ffd700;
 }
 
 .container{
@@ -51,6 +68,22 @@ h1,h2{
     text-align:center;
 }
 
+.profile-img {
+    display: block;
+    margin: 0 auto 20px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #ffd700;
+}
+
+.bio {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
 .link-box{
     text-align:center;
     margin-top:25px;
@@ -62,6 +95,24 @@ h1,h2{
     color:#ffd700;
     font-size:18px;
     text-decoration:none;
+    transition: color 0.3s;
+}
+
+.link-box a:hover {
+    color: #fff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
 }
 </style>
 
@@ -80,16 +131,20 @@ function showMenu(menu){
 <div class="overlay">
 
 <nav>
+<div class="logo">
+<img src="https://via.placeholder.com/50x50/ffd700/000?text=EL" alt="Logo Egan Library">
+</div>
 <a href="#" onclick="showMenu('dashboard')">Dashboard</a>
-<a href="#" onclick="showMenu('katalog')">Katalog</a>
+<a href="#" onclick="showMenu('katalog')">Koleksi Buku</a>
 <a href="#" onclick="showMenu('kegiatan')">Kegiatan Literasi</a>
 </nav>
 
 <div class="container">
 
 <div id="dashboard" class="section active">
-<h1>Egan Library</h1>
-<p style="text-align:center;">Selamat datang di perpustakaan pribadi Egan.</p>
+<h1>Profil Egan</h1>
+<img src="https://via.placeholder.com/150x150/cccccc/000?text=Foto+Profil" alt="Foto Profil Egan" class="profile-img">
+<p class="bio">Halo! Saya Egan, seorang pustakawan dan pecinta buku yang berdedikasi untuk mempromosikan literasi dan pengetahuan. Dengan pengalaman di bidang perpustakaan modern, saya senang berbagi koleksi buku dan kegiatan literasi untuk menginspirasi orang lain.</p>
 
 <div class="link-box">
 <a href="https://www.facebook.com/profile.php?id=61575099244106" target="_blank">
@@ -97,27 +152,27 @@ Link Facebook
 </a>
 
 <a href="https://drive.google.com/drive/folders/1cDexwHhdxwij8-Lq1sXUS5BwzS5ZeK61?hl=id" target="_blank">
-Curiculum Vitae
+Curriculum Vitae
 </a>
 </div>
 
 </div>
 
 <div id="katalog" class="section">
-<h2>Daftar Buku</h2>
+<h2>Koleksi Buku Favorit</h2>
 <ul>
-<li>Manajemen Perpustakaan Modern</li>
-<li>Digital Library Concepts</li>
-<li>Literasi Informasi untuk Mahasiswa</li>
+<li>Manajemen Perpustakaan Modern - Panduan praktis untuk pengelolaan perpustakaan.</li>
+<li>Digital Library Concepts - Eksplorasi konsep perpustakaan digital.</li>
+<li>Literasi Informasi untuk Mahasiswa - Keterampilan penting dalam era digital.</li>
 </ul>
 </div>
 
 <div id="kegiatan" class="section">
 <h2>Kegiatan Literasi</h2>
 <ul>
-<li>Program Pojok Literasi</li>
-<li>Sosialisasi Digitalisasi Arsip</li>
-<li>Diskusi Buku Mingguan</li>
+<li>Program Pojok Literasi - Membaca bersama di komunitas lokal.</li>
+<li>Sosialisasi Digitalisasi Arsip - Workshop tentang penyimpanan digital.</li>
+<li>Diskusi Buku Mingguan - Berbagi pemikiran tentang buku terbaru.</li>
 </ul>
 </div>
 
