@@ -9,7 +9,7 @@
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background-image: url("https://unsplash.com/photos/cityscape-at-dusk-with-illuminated-buildings-and-colorful-sky-Op4ZQvNmGuU");
+    background-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"); /* Replace with your direct image URL */
     background-size: cover;
     background-position: center;
     color:white;
@@ -41,10 +41,12 @@ nav a{
 
 .section{
     display:none;
+    transition: opacity 0.3s ease;
 }
 
 .active{
     display:block;
+    opacity: 1;
 }
 
 h1,h2{
@@ -97,11 +99,11 @@ function showMenu(menu){
 <p style="text-align:center;">Welcome to my profile.</p>
 
 <div class="link-box">
-<a href="https://www.instagram.com/adrian.siahaan___________?igsh=MTN0YWFvamdmaWF4cQ==" target="_blank">
+<a href="https://www.instagram.com/adrian.siahaan___________?igsh=MTN0YWFvamdmaWF4cQ==" target="_blank" rel="noopener noreferrer">
 Look at Me
 </a>
 
-<a href="https://drive.google.com/drive/folders/1FmDhcLErk2as-_XYR50NTzipogEo1_g-" target="_blank">
+<a href="https://drive.google.com/drive/folders/1FmDhcLErk2as-_XYR50NTzipogEo1_g-" target="_blank" rel="noopener noreferrer">
 Profile
 </a>
 </div>
@@ -110,10 +112,12 @@ Profile
 <h3>Best Video</h3>
 
 <iframe width="560" height="315"
-src="https://youtu.be/Gzbl_1z2wj4?si=mkX9Q69Etoo6n7a6"
+src="https://www.youtube.com/embed/Gzbl_1z2wj4"
 title="YouTube video"
 frameborder="0"
-allowfullscreen>
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen
+loading="lazy">
 </iframe>
 
 </div>
