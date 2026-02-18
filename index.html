@@ -70,6 +70,39 @@ h1,h2{
     text-align:center;
     margin-top:30px;
 }
+
+/* Styling untuk form login */
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 8px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffd700;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+}
+
+.login-form button:hover {
+    background-color: #e6c200;
+}
 </style>
 
 <script>
@@ -90,6 +123,7 @@ function showMenu(menu){
 <a href="#" onclick="showMenu('dashboard')">Dashboard</a>
 <a href="#" onclick="showMenu('katalog')">Katalog</a>
 <a href="#" onclick="showMenu('kegiatan')">Kegiatan Literasi</a>
+<a href="#" onclick="showMenu('login')">Login</a>
 </nav>
 
 <div class="container">
@@ -144,6 +178,42 @@ loading="lazy">
 <li>Praktik</li>
 </ul>
 
+</div>
+
+<!-- LOGIN SECTION -->
+<div id="login" class="section">
+<h2>Form Login Anggota</h2>
+
+<form>
+<label for="username">Username</label>
+<input type="text" id="username" placeholder="Masukkan username">
+
+<label for="password">Password</label>
+<input type="password" id="password" placeholder="Masukkan password">
+
+<div class="option-group">
+<label>
+<input type="checkbox"> Ingat saya
+</label>
+</div>
+
+<div class="option-group">
+<label>Status Pengguna:</label>
+<label><input type="radio" name="status"> Mahasiswa</label>
+<label><input type="radio" name="status"> Umum</label>
+</div>
+
+<button type="submit">Login</button>
+
+</form>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    </form>
+</div>
 </div>
 
 </div>
