@@ -9,7 +9,7 @@
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background-image: url("https://images.unsplash.com/photo-1633601789510-e92683dfadcf?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* Replace with your direct image URL */
+    background-image: url("https://images.unsplash.com/photo-1633601789510-e92683dfadcf?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
     background-size: cover;
     background-position: center;
     color:white;
@@ -24,6 +24,9 @@ nav{
     background-color: rgba(0,0,0,0.8);
     padding:15px;
     text-align:center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 nav a{
@@ -31,6 +34,11 @@ nav a{
     margin:0 15px;
     text-decoration:none;
     font-weight:bold;
+    cursor: pointer;
+}
+
+nav a:hover{
+    color: #ffd700;
 }
 
 .container{
@@ -39,18 +47,25 @@ nav a{
     margin:auto;
 }
 
+/* Bagian Menu (Section) */
 .section{
-    display:none;
+    display:none; /* Semua bagian disembunyikan dulu */
     transition: opacity 0.3s ease;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .active{
     display:block;
-    opacity: 1;
 }
 
 h1,h2{
     text-align:center;
+    color: #ffd700; /* Warna Emas */
 }
 
 .link-box{
@@ -64,6 +79,14 @@ h1,h2{
     color:#ffd700;
     font-size:18px;
     text-decoration:none;
+    padding: 10px;
+    border: 1px solid #ffd700;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.link-box a:hover{
+    background-color: rgba(255, 215, 0, 0.2);
 }
 
 .video-box{
@@ -71,13 +94,14 @@ h1,h2{
     margin-top:30px;
 }
 
-/* Styling untuk form login */
+/* Styling untuk form login (Bagian Atas) */
 .login-form {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
     background-color: rgba(0,0,0,0.8);
     border-radius: 8px;
+    border: 1px solid #ffd700;
 }
 
 .login-form input {
@@ -87,9 +111,10 @@ h1,h2{
     border: none;
     border-radius: 4px;
     font-size: 16px;
+    box-sizing: border-box; /* Agar padding tidak memecah lebar */
 }
 
-.login-form button {
+.login-form button, .button {
     width: 100%;
     padding: 10px;
     background-color: #ffd700;
@@ -98,19 +123,64 @@ h1,h2{
     font-size: 16px;
     cursor: pointer;
     color: black;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-.login-form button:hover {
+.login-form button:hover, .button:hover {
     background-color: #e6c200;
+}
+
+/* Styling untuk Bagian Daftar & Contact (Yang belum ada stylenya) */
+.card {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #555;
+}
+
+.card label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.card input, .card textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    font-size: 12px;
+    opacity: 0.7;
 }
 </style>
 
 <script>
 function showMenu(menu){
-    document.querySelectorAll('.section').forEach(sec=>{
+    // 1. Sembunyikan semua bagian dengan class 'section'
+    document.querySelectorAll('.section').forEach(sec => {
         sec.classList.remove('active');
     });
-    document.getElementById(menu).classList.add('active');
+    
+    // 2. Tampilkan bagian yang dipilih (ID-nya sesuai parameter)
+    const selectedSection = document.getElementById(menu);
+    if (selectedSection) {
+        selectedSection.classList.add('active');
+    }
+    
+    // Gulir ke atas saat pindah menu (untuk tampilan mobile)
+    window.scrollTo(0, 0);
 }
 </script>
 
@@ -120,103 +190,133 @@ function showMenu(menu){
 <div class="overlay">
 
 <nav>
-<a href="#" onclick="showMenu('dashboard')">Dashboard</a>
-<a href="#" onclick="showMenu('katalog')">Katalog</a>
-<a href="#" onclick="showMenu('kegiatan')">Kegiatan Literasi</a>
-<a href="#" onclick="showMenu('login')">Login</a>
+    <a onclick="showMenu('dashboard')">Dashboard</a>
+    <a onclick="showMenu('katalog')">Katalog</a>
+    <a onclick="showMenu('kegiatan')">Literasi</a>
+    <a onclick="showMenu('login')">Login</a>
+    <a onclick="showMenu('daftar')">Daftar</a> <!-- Link Baru -->
+    <a onclick="showMenu('contact')">Contact</a> <!-- Link Baru -->
 </nav>
 
 <div class="container">
 
+<!-- DASHBOARD -->
 <div id="dashboard" class="section active">
-<h1>Adrian Siahaan</h1>
-<p style="text-align:center;">Welcome to my profile.</p>
+    <h1>Adrian Siahaan</h1>
+    <p style="text-align:center;">Welcome to my profile.</p>
 
-<div class="link-box">
-<a href="https://www.instagram.com/adrian.siahaan___________?igsh=MTN0YWFvamdmaWF4cQ==" target="_blank" rel="noopener noreferrer">
-Look at Me
-</a>
+    <div class="link-box">
+        <a href="https://www.instagram.com/adrian.siahaan___________?igsh=MTN0YWFvamdmaWF4cQ==" target="_blank">
+        Look at Me
+        </a>
+        <a href="https://drive.google.com/drive/folders/1FmDhcLErk2as-_XYR50NTzipogEo1_g-" target="_blank">
+        Profile
+        </a>
+    </div>
 
-<a href="https://drive.google.com/drive/folders/1FmDhcLErk2as-_XYR50NTzipogEo1_g-" target="_blank" rel="noopener noreferrer">
-Profile
-</a>
+    <div class="video-box">
+        <h3>Best Video</h3>
+        <!-- Link YouTube sudah diperbaiki ke format Embed -->
+        <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/xYVOBXAL_ag"
+        title="YouTube video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy">
+        </iframe>
+    </div>
 </div>
 
-<div class="video-box">
-<h3>Best Video</h3>
-
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/Gzbl_1z2wj4"
-title="YouTube video"
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen
-loading="lazy">
-</iframe>
-
-</div>
-
-</div>
-
+<!-- KATALOG BUKU -->
 <div id="katalog" class="section">
-<h2>Daftar Buku</h2>
-<ul>
-<li>Pengantar Ilmu Hukum </li>
-<li>Hukum Agraria</li>
-<li>Hukum dan Masyarakat</li>
-<li>Hukum Pidana</li>
-<li>Hukum Perdata</li>
-</ul>
+    <h2>Daftar Buku</h2>
+    <ul style="line-height: 1.8;">
+        <li>Pengantar Ilmu Hukum </li>
+        <li>Hukum Agraria</li>
+        <li>Hukum dan Masyarakat</li>
+        <li>Hukum Pidana</li>
+        <li>Hukum Perdata</li>
+    </ul>
 </div>
 
+<!-- KEGIATAN -->
 <div id="kegiatan" class="section">
-<h2>Kegiatan</h2>
-
-<ul>
-<li>Seminar </li>
-<li>Kaderisasi</li>
-<li>Praktik</li>
-</ul>
-
+    <h2> Kegiatan Literasi</h2>
+    <ul style="line-height: 1.8;">
+        <li>Seminar Hukum</li>
+        <li>Kaderisasi Mahasiswa</li>
+        <li>Praktik Peradilan</li>
+    </ul>
 </div>
 
-<!-- LOGIN SECTION -->
+<!-- LOGIN -->
 <div id="login" class="section">
-<h2>Form Login Anggota</h2>
-
-<form>
-<label for="username">Username</label>
-<input type="text" id="username" placeholder="Masukkan username">
-
-<label for="password">Password</label>
-<input type="password" id="password" placeholder="Masukkan password">
-
-<div class="option-group">
-<label>
-<input type="checkbox"> Ingat saya
-</label>
+    <h2>Login Anggota</h2>
+    <div class="login-form">
+        <form>
+            <label>Email</label>
+            <input type="email" required>
+            <label>Password</label>
+            <input type="password" required>
+            <button type="submit">Masuk</button>
+        </form>
+    </div>
 </div>
 
-<div class="option-group">
-<label>Status Pengguna:</label>
-<label><input type="radio" name="status"> Mahasiswa</label>
-<label><input type="radio" name="status"> Umum</label>
+<!-- DAFTAR (REGISTER) -->
+<div id="daftar" class="section">
+    <h2>Pendaftaran Anggota</h2>
+    <div class="card">
+        <form>
+            <label>Nama Lengkap</label>
+            <input type="text" required>
+            
+            <label>Email</label>
+            <input type="email" required>
+            
+            <label>Password</label>
+            <input type="password" required>
+            
+            <button type="submit" class="button">Daftar Sekarang</button>
+        </form>
+    </div>
 </div>
 
-<button type="submit">Login</button>
+<!-- CONTACT -->
+<div id="contact" class="section">
+    <h2>Contact Pemilik</h2>
+    <div class="card">
+        <p><strong>Nama:</strong> Adrian Siahaan</p>
+        <p><strong>Email:</strong> adriansanyakobsiahaan@gmail.com</p>
+        <p><strong>WhatsApp:</strong> 082163193580</p>
+        <p><strong>Lokasi:</strong> Medan, Indonesia</p>
+    </div>
 
-</form>
-</div>
-
+    <h2>Kirim Pesan</h2>
+    <div class="card">
+        <form>
+            <label>Nama</label>
+            <input type="text" placeholder="Masukkan nama Anda" required>
+            
+            <label>Email</label>
+            <input type="email" placeholder="Masukkan email Anda" required>
+            
+            <label>Pesan</label>
+            <textarea rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+            
+            <button type="submit" class="button">Kirim Pesan</button>
+        </form>
+    </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-    </form>
-</div>
-</div>
+    &copy; 2026 AdrianShn. All Rights Reserved.
+</footer>
 
 </div>
+
 </div>
 
 </body>
