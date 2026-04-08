@@ -1,223 +1,462 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdrianShn</title>
-
-<style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background-image: url("https://images.unsplash.com/photo-1633601789510-e92683dfadcf?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-    background-size: cover;
-    background-position: center;
-    color:white;
-}
-
-.overlay{
-    background-color: rgba(0,0,0,0.65);
-    min-height:100vh;
-}
-
-nav{
-    background-color: rgba(0,0,0,0.8);
-    padding:15px;
-    text-align:center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-nav a{
-    color:white;
-    margin:0 15px;
-    text-decoration:none;
-    font-weight:bold;
-    cursor: pointer;
-}
-
-nav a:hover{
-    color: #ffd700;
-}
-
-.container{
-    padding:40px;
-    max-width:900px;
-    margin:auto;
-}
-
-/* Bagian Menu (Section) */
-.section{
-    display:none; /* Semua bagian disembunyikan dulu */
-    transition: opacity 0.3s ease;
-    animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.active{
-    display:block;
-}
-
-h1,h2{
-    text-align:center;
-    color: #ffd700; /* Warna Emas */
-}
-
-.link-box{
-    text-align:center;
-    margin-top:25px;
-}
-
-.link-box a{
-    display:block;
-    margin:10px;
-    color:#ffd700;
-    font-size:18px;
-    text-decoration:none;
-    padding: 10px;
-    border: 1px solid #ffd700;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-.link-box a:hover{
-    background-color: rgba(255, 215, 0, 0.2);
-}
-
-.video-box{
-    text-align:center;
-    margin-top:30px;
-}
-
-/* Styling untuk form login (Bagian Atas) */
-.login-form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: rgba(0,0,0,0.8);
-    border-radius: 8px;
-    border: 1px solid #ffd700;
-}
-
-.login-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box; /* Agar padding tidak memecah lebar */
-}
-
-.login-form button, .button {
-    width: 100%;
-    padding: 10px;
-    background-color: #ffd700;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    color: black;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.login-form button:hover, .button:hover {
-    background-color: #e6c200;
-}
-
-/* Styling untuk Bagian Daftar & Contact (Yang belum ada stylenya) */
-.card {
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #555;
-}
-
-.card label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.card input, .card textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    font-size: 12px;
-    opacity: 0.7;
-}
-</style>
-
-<script>
-function showMenu(menu){
-    // 1. Sembunyikan semua bagian dengan class 'section'
-    document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.remove('active');
-    });
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdrianShn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="preload" href="https://images.unsplash.com/photo-..." as="image">
+	<meta name="theme-color" content="#0f172a">
     
-    // 2. Tampilkan bagian yang dipilih (ID-nya sesuai parameter)
-    const selectedSection = document.getElementById(menu);
-    if (selectedSection) {
-        selectedSection.classList.add('active');
-    }
-    
-    // Gulir ke atas saat pindah menu (untuk tampilan mobile)
-    window.scrollTo(0, 0);
-}
-</script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            background: url(https://images.unsplash.com/photo-1618771623063-6c3faa854a61?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+        }
+        .overlay { min-height: 100vh; display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.2); }
+        
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(15, 23, 42, 0.9); 
+            padding: 15px 40px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            flex-wrap: wrap; 
+            gap: 10px; 
+        }
+        .nav-left { display: flex; gap: 20px; flex-wrap: wrap; }
+        .nav-right { display: flex; gap: 10px; align-items: center; }
+        .nav-left a, .nav-right a { color: #ffffff; text-decoration: none; font-weight: 600; font-size: 1rem; transition: 0.3s; padding-bottom: 5px; cursor: pointer; }
+        .nav-right a { background: #ffd700; color: #0f172a; padding: 8px 20px; border-radius: 5px; }
+        .nav-left a:hover, .nav-left a.active { color: #ffd700; border-bottom: 2px solid #ffd700; }
+        .nav-right a:hover { background: #e6c200; }
+        
+        .container { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(1px); max-width: 800px; margin: 40px auto; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); flex-grow: 1; width: 90%; }
+        
+        .section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        h1, h2 { color: #ffd700; margin-bottom: 15px; text-align: center; }
+        .tagline { text-align: center; font-size: 1.1rem; margin-bottom: 20px; }
+        hr { border: 0; height: 1px; background: #334155; margin: 20px 0; }
+        
+        /* Dashboard Links */
+        .link-box { text-align: center; margin-top: 25px; }
+        .link-box a { 
+            display: inline-block; margin: 10px; color: #ffd700; font-size: 1.1rem; text-decoration: none; 
+            padding: 15px 25px; border: 2px solid #ffd700; border-radius: 8px; transition: all 0.3s; 
+            font-weight: 600;
+        }
+        .link-box a:hover { background: rgba(255, 215, 0, 0.2); transform: translateY(-2px); }
+        
+        .video-box { text-align: center; margin-top: 40px; }
+        .video-box iframe { border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 100%; }
+        
+        /* Katalog */
+        .search-box { text-align: center; margin-bottom: 20px; }
+        .search-box input { width: 100%; padding: 12px 20px; border: none; border-radius: 8px; font-size: 1rem; outline: none; }
+        #bookList { list-style: none; }
+        #bookList li { background: rgba(255, 255, 255, 0.1); margin-bottom: 10px; padding: 15px; border-radius: 8px; transition: 0.3s; cursor: pointer; }
+        #bookList li:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(5px); }
+        
+        /* Kegiatan - FIXED CSS */
+		.activities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 0;
+        }
 
+        .activity-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+        }
+
+        .activity-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .activity-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255,215,0,0.3);
+            border-color: #ffd700;
+        }
+
+        .activity-item:hover::before {
+            opacity: 1;
+        }
+
+        .activity-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .activity-item:hover .activity-image {
+            transform: scale(1.1);
+        }
+
+        .activity-content {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .activity-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(255,215,0,0.4);
+        }
+
+        .activity-title {
+            color: #ffd700;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .activity-date {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .activity-desc {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 0.98rem;
+        }
+
+        .activity-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
+            color: #0f172a;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+        }
+
+        .activity-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,215,0,0.6);
+            color: #0f172a;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .activities-list {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .activity-content {
+                padding: 20px;
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            max-width: 90%;
+            max-height: 90%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            animation: modalSlideIn 0.4s ease-out;
+            overflow: hidden;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            padding: 30px;
+            color: #ffffff;
+        }
+
+        .modal-title {
+            color: #ffd700;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .modal-date {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .modal-description {
+            line-height: 1.7;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #ffd700;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .modal-close:hover {
+            color: #ffffff;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: 10% auto;
+                max-width: 95%;
+            }
+            
+            .modal-image {
+                height: 250px;
+            }
+            
+            .modal-body {
+                padding: 25px 20px;
+            }
+        }
+        
+        
+        .form-container { max-width: 400px; margin: 0 auto; }
+        form { display: flex; flex-direction: column; width: 100%; }
+        form label { margin-bottom: 5px; font-size: 0.9rem; color: #cbd5e1; }
+        form input, form textarea, form select { padding: 12px; margin-bottom: 15px; border: none; border-radius: 5px; font-size: 1rem; outline: none; font-family: 'Poppins', sans-serif; background: rgba(255,255,255,0.1); color: white; }
+        form input::placeholder, form textarea::placeholder { color: #94a3b8; }
+        form button { padding: 12px; background: #ffd700; color: #0f172a; border: none; border-radius: 5px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+        form button:hover { background: #e6c200; }
+        
+        /* Contact Card - VERTICAL LAYOUT */
+        .contact-card { 
+            background: rgba(255, 255, 255, 0.1); 
+            padding: 25px; 
+            border-radius: 10px; 
+            margin-bottom: 30px; 
+            border-left: 4px solid #ffd700; 
+        }
+        .contact-info { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 30px; 
+            margin-bottom: 0; 
+        }
+        .contact-item { 
+            display: flex; 
+            align-items: center; 
+			flex-direction: column;
+            gap: 20px; 
+            padding: 30px; 
+            background: rgba(255,255,255,0.05); 
+            border-radius: 15px; 
+            text-align: center; 
+        }	
+        .contact-item strong { 
+            color: #ffd700; 
+            font-size: 1.1rem; 
+            min-width: 300px; 
+		}
+        
+        /* Footer */
+       .main-footer {
+            background: #0f172a;
+            color: #ffd700;
+            padding: 60px 0 30px;
+            font-family: 'Poppins', sans-serif;
+            border-top: 4px solid #38bdf8;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .footer-column {
+            color: #cbd5e1;
+        }
+
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: #ffd700;
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+        }
+
+        .jam-operasional p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .social-box {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-box a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-box a:hover {
+            background: #ffd700;
+            color: #0f172a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+    </style>
 </head>
-
 <body>
+
 <div class="overlay">
 
 <nav>
-    <a onclick="showMenu('dashboard')">Dashboard</a>
-    <a onclick="showMenu('katalog')">Katalog</a>
-    <a onclick="showMenu('kegiatan')">Literasi</a>
-    <a onclick="showMenu('login')">Login</a>
-    <a onclick="showMenu('daftar')">Daftar</a> <!-- Link Baru -->
-    <a onclick="showMenu('contact')">Contact</a> <!-- Link Baru -->
+    <div class="nav-left">
+        <a onclick="showMenu('dashboard', this)" class="active">Dashboard</a>
+        <a onclick="showMenu('katalog', this)">Katalog</a>
+        <a onclick="showMenu('kegiatan', this)">Event</a>
+        <a onclick="showMenu('contact', this)">Contact</a>
+    </div>
+    <div class="nav-right">
+        <a onclick="showMenu('login', this)">Login</a>
+        <a onclick="showMenu('daftar', this)">Daftar</a>
+    </div>
 </nav>
 
 <div class="container">
+    
+    <div id="dashboard" class="section active">
+        <h1>AdhyaksaLib</h1>
+        <p class="tagline">Welcome to Adhyaksa Library</p>
+        <p style="text-align: center;">Perpustakaan Digital - Katalog Hukum</p>
+        
+        <div class="link-box">
+            <a href="https://www.instagram.com/adrian.siahaan___________?igsh=MTN0YWFvamdmaWF4cQ==" target="_blank">
+                📱 Look at Me
+            </a>
+            <a href="https://drive.google.com/drive/folders/1FmDhcLErk2as-_XYR50NTzipogEo1_g-" target="_blank">
+                📁 Profile
+            </a>
+        </div>
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="section active">
-    <h1>Adrian Siahaan</h1>
-    <p style="text-align:center;">Welcome to my profile.</p>
-
-    <div class="link-box">
-        <a href="https://www.instagram.com/adrian.siahaan___________?igsh=MTN0YWFvamdmaWF4cQ==" target="_blank">
-        Look at Me
-        </a>
-        <a href="https://drive.google.com/drive/folders/1FmDhcLErk2as-_XYR50NTzipogEo1_g-" target="_blank">
-        Profile
-        </a>
-    </div>
-
-    <div class="video-box">
+        <div class="video-box">
         <h3>Best Video</h3>
-        <!-- Link YouTube sudah diperbaiki ke format Embed -->
-        <iframe width="560" height="315"
+                <iframe width="560" height="315"
         src="https://www.youtube.com/embed/xYVOBXAL_ag"
         title="YouTube video"
         frameborder="0"
@@ -225,99 +464,262 @@ function showMenu(menu){
         allowfullscreen
         loading="lazy">
         </iframe>
-    </div>
-</div>
-
-<!-- KATALOG BUKU -->
-<div id="katalog" class="section">
-    <h2>Daftar Buku</h2>
-    <ul style="line-height: 1.8;">
-        <li>Pengantar Ilmu Hukum </li>
-        <li>Hukum Agraria</li>
-        <li>Hukum dan Masyarakat</li>
-        <li>Hukum Pidana</li>
-        <li>Hukum Perdata</li>
-    </ul>
-</div>
-
-<!-- KEGIATAN -->
-<div id="kegiatan" class="section">
-    <h2> Kegiatan Literasi</h2>
-    <ul style="line-height: 1.8;">
-        <li>Seminar Hukum</li>
-        <li>Kaderisasi Mahasiswa</li>
-        <li>Praktik Peradilan</li>
-    </ul>
-</div>
-
-<!-- LOGIN -->
-<div id="login" class="section">
-    <h2>Login Anggota</h2>
-    <div class="login-form">
-        <form>
-            <label>Email</label>
-            <input type="email" required>
-            <label>Password</label>
-            <input type="password" required>
-            <button type="submit">Masuk</button>
-        </form>
-    </div>
-</div>
-
-<!-- DAFTAR (REGISTER) -->
-<div id="daftar" class="section">
-    <h2>Pendaftaran Anggota</h2>
-    <div class="card">
-        <form>
-            <label>Nama Lengkap</label>
-            <input type="text" required>
-            
-            <label>Email</label>
-            <input type="email" required>
-            
-            <label>Password</label>
-            <input type="password" required>
-            
-            <button type="submit" class="button">Daftar Sekarang</button>
-        </form>
-    </div>
-</div>
-
-<!-- CONTACT -->
-<div id="contact" class="section">
-    <h2>Contact Pemilik</h2>
-    <div class="card">
-        <p><strong>Nama:</strong> Adrian Siahaan</p>
-        <p><strong>Email:</strong> adriansanyakobsiahaan@gmail.com</p>
-        <p><strong>WhatsApp:</strong> 082163193580</p>
-        <p><strong>Lokasi:</strong> Medan, Indonesia</p>
+        </div>
     </div>
 
-    <h2>Kirim Pesan</h2>
-    <div class="card">
-        <form>
-            <label>Nama</label>
-            <input type="text" placeholder="Masukkan nama Anda" required>
-            
-            <label>Email</label>
-            <input type="email" placeholder="Masukkan email Anda" required>
-            
-            <label>Pesan</label>
-            <textarea rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
-            
-            <button type="submit" class="button">Kirim Pesan</button>
-        </form>
+    
+    <div id="katalog" class="section">
+        <h2>Katalog Buku Hukum</h2>
+        <div class="search-box">
+            <input type="text" id="searchInput" onkeyup="searchBooks()" placeholder="Cari buku hukum...">
+        </div>
+        <ul id="bookList">
+            <li>Pengantar Ilmu Hukum</li>
+            <li>Hukum Agraria</li>
+            <li>Hukum dan Masyarakat</li>
+            <li>Hukum Pidana</li>
+            <li>Hukum Perdata</li>
+        </ul>
+    </div>
+
+    
+    <div id="kegiatan" class="section">
+    <h2>Kegiatan/Event</h2>
+    <p style="text-align: center; color: #cbd5e1; margin-bottom: 40px; font-size: 1.1rem;">
+        Ikuti berbagai kegiatan menarik seputar hukum dan perpustakaan
+    </p>
+    
+    <div class="activities-list">
+        
+        
+        <div class="activity-item" onclick="openModal('https://www.jaringannews.com/wp-content/uploads/2025/08/SEMINAR-ILMIAH-OK-scaled.jpg', 'Seminar Hukum Kejaksaan', 'Selasa, 26 Agustus 2025 | 08.30-Selesai', 'Foto seminar ilmiah bertema "Optimalisasi Pendekatan Follow The Asset dan Follow The Money melalui Deferred Prosecution Agreement dalam Penanganan Perkara Pidana". Acara diselenggarakan oleh Kejaksaan Tinggi Sumatera Utara bekerja sama dengan FH USU di Gedung Peradilan Semu FH USU, Medan.')">
+            <img src="https://www.jaringannews.com/wp-content/uploads/2025/08/SEMINAR-ILMIAH-OK-scaled.jpg" 
+                 alt="Seminar Hukum" class="activity-image">
+            <div class="activity-content">
+                <div class="activity-icon">📚</div>
+                <div class="activity-title">Seminar Hukum</div>
+                <div class="activity-date">
+                    <i class="fas fa-calendar-alt"></i> Selasa, 26 Agustus 2025 | 08.30-Selesai
+                </div>
+                <p class="activity-desc">
+                    Dalam rangka memperingati Hari Lahir (Harlah) Kejaksaan ke-80 tahun 2025, Kejaksaan Tinggi Sumatera Utara (Kejati Sumut) bekerja sama dengan Fakultas Hukum Universitas Sumatera Utara (FH USU) akan menggelar seminar ilmiah bertema "Optimalisasi Pendekatan Follow The Asset dan Follow The Money melalui Deferred Prosecution Agreement dalam Penanganan Perkara Pidana".
+                </p>
+                <a href="#" class="activity-btn">
+                    <i class="fas fa-arrow-right"></i> Info Lengkap
+                </a>
+            </div>
+        </div>
+        
+        
+        <div class="activity-item" onclick="openModal('https://marinews.mahkamahagung.go.id/static/2026/02/05/poster-pameran-kampung-hukum-2026-QvBXm.jpeg', 'Talkshow Hukum - Pameran Kampung Hukum 2026', '9-10 Februari 2026 | 10:00 - 14:00 WIB', 'Poster resmi Pameran Kampung Hukum (PKH) 2026 bertema "Pengadilan Terpercaya, Rakyat Sejahtera". Diselenggarakan oleh Mahkamah Agung RI di Area Parkir Barat Mahkamah Agung, Jakarta.')">
+            <img src="https://marinews.mahkamahagung.go.id/static/2026/02/05/poster-pameran-kampung-hukum-2026-QvBXm.jpeg" 
+                 alt="Diskusi Hukum" class="activity-image">
+            <div class="activity-content">
+                <div class="activity-icon">👥</div>
+                <div class="activity-title">Talkshow Hukum</div>
+                <div class="activity-date">
+                    <i class="fas fa-calendar-alt"></i> 9-10 Februari 2026 | 10:00 - 14:00 WIB
+                </div>
+                <p class="activity-desc">
+                    Dalam rangka memeriahkan kegiatan Laporan Tahunan Mahkamah Agung Tahun 2026, Mahkamah Agung melalui Biro Hukum dan Humas kembali menggelar Pameran Kampung Hukum (PKH) 2026. Tahun ini PKH mengusung tema "Pengadilan Terpercaya, Rakyat Sejahtera".
+                </p>
+                <a href="#" class="activity-btn">
+                    <i class="fas fa-info-circle"></i> Info Lengkap
+                </a>
+            </div>
+        </div>
+        
+        
+        <div class="activity-item" onclick="openModal('https://pa-pangkajene.go.id/images/Berita/2025/sidang%20semu%20uin2.jpg', 'Simulasi Praktik Peradilan', 'Senin, 30 Maret 2026 | 10:00 - 15:00 WIB', 'Foto kegiatan simulasi praktik sidang peradilan dengan role-playing lengkap: hakim, jaksa, pengacara, dan peserta. Latihan praktik peradilan untuk mahasiswa hukum.')">
+            <img src="https://pa-pangkajene.go.id/images/Berita/2025/sidang%20semu%20uin2.jpg" 
+                 alt="Simulasi Peradilan" class="activity-image">
+            <div class="activity-content">
+                <div class="activity-icon">⚖️</div>
+                <div class="activity-title">Simulasi Praktik Peradilan</div>
+                <div class="activity-date">
+                    <i class="fas fa-calendar-alt"></i> Senin, 30 Maret 2026 | 10:00 - 15:00 WIB
+                </div>
+                <p class="activity-desc">
+                    Latihan praktik sidang peradilan lengkap dengan role-playing hakim, 
+                    jaksa, dan pengacara.
+                </p>
+                <a href="#" class="activity-btn">
+                    <i class="fas fa-arrow-right"></i> Info Lengkap
+                </a>
+            </div>
+        </div>
     </div>
 </div>
+    
+    <div id="login" class="section">
+        <h2>Login Anggota</h2>
+        <div class="form-container">
+            <form onsubmit="event.preventDefault(); alert('Login berhasil! Selamat datang di Adrian Library.'); showMenu('dashboard', document.querySelector('.nav-left a'));">
+                <label>Email</label>
+                <input type="email" placeholder="Masukkan email Anda" required>
+                <label>Password</label>
+                <input type="password" placeholder="Masukkan kata sandi" required>
+                <button type="submit">MASUK</button>
+                <p style="text-align: center; margin-top: 20px; font-size: 0.95rem; color: #cbd5e1;">
+                    Belum punya akun? <a href="#" onclick="showMenu('daftar')" style="color: #ffd700; font-weight: bold;">Daftar di sini</a>
+                </p>
+            </form>
+        </div>
+    </div>
 
-<!-- FOOTER -->
-<footer>
-    &copy; 2026 AdrianShn. All Rights Reserved.
+    
+    <div id="daftar" class="section">
+        <h2>Pendaftaran Anggota</h2>
+        <div class="form-container">
+            <form onsubmit="event.preventDefault(); alert('Pendaftaran berhasil! Silakan login.'); showMenu('login');">
+                <label>Nama Lengkap</label>
+                <input type="text" placeholder="Masukkan nama lengkap" required>
+                <label>Email</label>
+                <input type="email" placeholder="Masukkan email" required>
+                <label>Password</label>
+                <input type="password" placeholder="Buat kata sandi" required>
+                <button type="submit">DAFTAR SEKARANG</button>
+                <p style="text-align: center; margin-top: 20px; font-size: 0.95rem; color: #cbd5e1;">
+                    Sudah punya akun? <a href="#" onclick="showMenu('login')" style="color: #ffd700; font-weight: bold;">Login di sini</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="contact" class="section">
+        <h2>Contact Pemilik</h2>
+        
+        
+        <div class="contact-card">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>👤 Adrian Siahaan</strong>
+                </div>
+                <div class="contact-item">
+                    <strong>📧 adriansanyakobsiahaan@gmail.com</strong>
+                </div>
+                <div class="contact-item">
+                    <strong>📱 082163193580</strong>
+                </div>
+                <div class="contact-item">
+                    <strong>📍 Medan, Indonesia</strong>
+                </div>
+            </div>
+        </div>
+
+        <h2>Kirim Pesan</h2>
+        <div class="form-container">
+            <form onsubmit="event.preventDefault(); alert('Pesan berhasil dikirim! Terima kasih.'); this.reset();">
+                <label>Nama</label>
+                <input type="text" placeholder="Masukkan nama Anda" required>
+                <label>Email</label>
+                <input type="email" placeholder="Masukkan email Anda" required>
+                <label>Pesan</label>
+                <textarea rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                <button type="submit">KIRIM PESAN</button>
+            </form>
+        </div>
+    </div>
+
+    
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-body">
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <div id="modalDate" class="modal-date"></div>
+                <p id="modalDescription" class="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+</div> 
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3 class="footer-title">AdhyaksaLib</h3>
+            <p>Perpustakaan Digital - Katalog Hukum</p>
+            <div class="jam-operasional">
+                <p><strong><i class="fas fa-clock"></i> Jam Operasional:</strong></p>
+                <p>Senin - Kamis: 08:00 - 15:30 WIB</p>
+                <p>Jumat - Sabtu: 08:00 - 12:00 WIB</p>
+                <p>Minggu: Akses Digital 24/7</p>
+            </div>
+        </div>
+
+        <div class="footer-column">
+              <h4>Hubungi Kami</h4>
+			<p><i class="fas fa-envelope"></i> adriansanyakobsiahaan@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> Medan, Sumatera Utara, Indonesia</p>
+            <div class="social-box">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 AdrianShn. All Rights Reserved.</p>
+    </div>
 </footer>
 
-</div>
+</div> 
 
-</div>
+<script>
+function showMenu(menuId, clickedElement) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    const selectedSection = document.getElementById(menuId);
+    if (selectedSection) selectedSection.classList.add('active');
+    
+    if(clickedElement && clickedElement.tagName === 'A') {
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        clickedElement.classList.add('active');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function searchBooks() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let li = document.getElementById('bookList').getElementsByTagName('li');
+    for (let i = 0; i < li.length; i++) {
+        let textValue = li[i].textContent || li[i].innerText;
+        li[i].style.display = textValue.toLowerCase().indexOf(input) > -1 ? "" : "none";
+    }
+}
+
+function openModal(imageSrc, title, date, description) {
+    document.getElementById('modalImage').src = imageSrc;
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalDate').textContent = date;
+    document.getElementById('modalDescription').textContent = description;
+    
+    document.getElementById('eventModal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; 
+}
+
+function closeModal() {
+    document.getElementById('eventModal').style.display = 'none';
+    document.body.style.overflow = 'auto'; 
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('eventModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+</script>
 
 </body>
 </html>
