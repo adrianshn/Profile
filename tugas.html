@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas - AdrianShn</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: url(https://images.unsplash.com/photo-1618771623063-6c3faa854a61?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D) no-repeat center center fixed; background-size: cover; color: #ffffff; }
+        .overlay { min-height: 100vh; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.6); }
+        
+        nav { display: flex; justify-content: space-between; align-items: center; background: rgba(15, 23, 42, 0.9); padding: 15px 40px; }
+        .nav-left a { color: #ffffff; text-decoration: none; font-weight: 600; cursor: pointer; border-bottom: 1px dotted #ffd700; }
+        .nav-left a:hover { color: #ffd700; }
+        
+        .container { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); max-width: 900px; margin: 40px auto; padding: 40px; border-radius: 15px; width: 90%; }
+        h1, h2 { color: #ffd700; text-align: center; margin-bottom: 20px; }
+        
+        /* Desain Tab Menu */
+        .tab-menu { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .tab-menu button { padding: 10px 20px; background: rgba(255, 255, 255, 0.1); border: 1px solid #ffd700; color: white; border-radius: 5px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .tab-menu button.active, .tab-menu button:hover { background: #ffd700; color: #0f172a; }
+        
+        .section { display: none; animation: fadeIn 0.4s; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Desain Kalkulator */
+        .calc-box { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+        .calc-box input, .calc-box select { padding: 10px; border-radius: 5px; border: none; font-size: 1.1rem; text-align: center; font-family: 'Poppins'; }
+        .btn-hitung { padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-hitung:hover { background: #2563eb; }
+        .hasil { text-align: center; font-size: 1.5rem; font-weight: bold; color: #ffd700; margin-top: 20px; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; }
+
+        /* Desain Iframe (Penampung File PHP) */
+        iframe { width: 100%; height: 500px; border: 2px dashed #334155; border-radius: 10px; background: rgba(255,255,255,0.05); }
+    </style>
+</head>
+<body>
+
+<div class="overlay">
+    <nav>
+        <div class="nav-left">
+            <a href="index.html">&larr; Kembali ke Halaman Utama</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Tugas</h1>
+        
+        <div class="tab-menu">
+            <button onclick="bukaTab('php', this)" class="active">1. Belajar PHP</button>
+            <button onclick="bukaTab('hitung', this)">2. Berhitung</button>
+            <button onclick="bukaTab('database', this)">3. Database</button>
+        </div>
+
+        <div id="php" class="section active">
+            <h2>1000 Hari Belajar PHP</h2>
+            <iframe src="belajar.php"></iframe>
+        </div>
+
+        <div id="hitung" class="section">
+            <h2>Kalkulator Operasi Bilangan</h2>
+            <div class="calc-box">
+                <input type="number" id="angka1" placeholder="Masukkan Angka 1">
+                <select id="operator">
+                    <option value="+">(+)</option>
+                    <option value="-">(-)</option>
+                    <option value="*">(x)</option>
+                    <option value="/">(/)</option>
+                </select>
+                <input type="number" id="angka2" placeholder="Masukkan Angka 2">
+                <button class="btn-hitung" onclick="hitungSkrg()">Hitung</button>
+            </div>
+            <div class="hasil" id="tempatHasil">Pilih angka dan klik hitung</div>
+        </div>
+
+        <div id="database" class="section">
+            <h2>Sistem Manajemen Database (CRUD)</h2>
+            <iframe src="koleksi_buku.php"></iframe>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // FUNGSI PINDAH TAB MENU
+    function bukaTab(tabId, btnElement) {
+        document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+        document.querySelectorAll('.tab-menu button').forEach(btn => btn.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        btnElement.classList.add('active');
+    }
+
+    // FUNGSI KALKULATOR
+    function hitungSkrg() {
+        let a = parseFloat(document.getElementById('angka1').value);
+        let b = parseFloat(document.getElementById('angka2').value);
+        let op = document.getElementById('operator').value;
+        let hasil = 0;
+
+        if(isNaN(a) || isNaN(b)) {
+            document.getElementById('tempatHasil').innerHTML = "Harap masukkan kedua angka dengan benar!";
+            return;
+        }
+
+        if(op === '+') hasil = a + b;
+        else if(op === '-') hasil = a - b;
+        else if(op === '*') hasil = a * b;
+        else if(op === '/') {
+            if(b === 0) {
+                document.getElementById('tempatHasil').innerHTML = "Angka tidak bisa dibagi 0!";
+                return;
+            }
+            hasil = a / b;
+        }
+
+        document.getElementById('tempatHasil').innerHTML = "Hasilnya adalah: " + hasil;
+    }
+</script>
+
+</body>
+</html>
