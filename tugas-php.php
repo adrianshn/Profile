@@ -1,179 +1,155 @@
 <?php
 session_start();
 
-// Inisialisasi data default
-if (!isset($_SESSION['data_buku'])) {
-    $_SESSION['data_buku'] = [
-        ['id' => 1, 'judul' => 'Some Kind of Wonderful', 'penulis' => 'Winna Efendi', 'kategori' => 'Fiksi Romantis'],
-        ['id' => 2, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'kategori' => 'Filsafat']
-    ];
+// =======================
+// SIMULASI DATABASE
+// =======================
+if (!isset($_SESSION['users'])) {
+    $_SESSION['users'] = [];
 }
 
-// ================= TAMBAH DATA =================
-if (isset($_POST['tambah_buku'])) {
-    $judul = trim($_POST['judul_baru'] ?? '');
-    $penulis = trim($_POST['penulis_baru'] ?? '');
-    $kategori = trim($_POST['kategori_baru'] ?? '');
+// =======================
+// PROSES DAFTAR
+// =======================
+if (isset($_POST['daftar'])) {
 
-    if ($judul && $penulis && $kategori) {
-        $id_baru = count($_SESSION['data_buku']) > 0 
-            ? end($_SESSION['data_buku'])['id'] + 1 
-            : 1;
+    $nama = htmlspecialchars($_POST['nama']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
 
-        $_SESSION['data_buku'][] = [
-            'id' => $id_baru,
-            'judul' => htmlspecialchars($judul),
-            'penulis' => htmlspecialchars($penulis),
-            'kategori' => htmlspecialchars($kategori)
-        ];
+    // Cek email sudah ada atau belum
+    foreach ($_SESSION['users'] as $user) {
+        if ($user['email'] == $email) {
+            echo "<script>alert('Email sudah terdaftar!'); window.location='index.html';</script>";
+            exit;
+        }
     }
+
+    // Simpan user
+    $_SESSION['users'][] = [
+        'nama' => $nama,
+        'email' => $email,
+        'password' => $password
+    ];
+
+    echo "<script>alert('Pendaftaran berhasil! Silakan login'); window.location='index.html';</script>";
+    exit;
 }
 
-// ================= HAPUS DATA =================
-if (isset($_POST['hapus_buku'])) {
-    $id_hapus = $_POST['id_hapus'] ?? null;
+// =======================
+// PROSES LOGIN
+// =======================
+if (isset($_POST['login'])) {
 
-    $_SESSION['data_buku'] = array_values(array_filter(
-        $_SESSION['data_buku'],
-        fn($buku) => $buku['id'] != $id_hapus
-    ));
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+
+    $login = false;
+
+    foreach ($_SESSION['users'] as $user) {
+        if ($user['email'] == $email && $user['password'] == $password) {
+            $_SESSION['login'] = $user['nama'];
+            $login = true;
+            break;
+        }
+    }
+
+    if ($login) {
+        echo "<script>alert('Login berhasil!'); window.location='tugas-php.php';</script>";
+    } else {
+        echo "<script>alert('Email atau password salah!'); window.location='index.html';</script>";
+    }
+
+    exit;
+}
+
+// =======================
+// LOGOUT
+// =======================
+if (isset($_GET['logout'])) {
+    session_destroy();
+    echo "<script>window.location='index.html';</script>";
+    exit;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tugas PHP</title>
+    <meta charset="UTF-8">
+    <title>Dashboard PHP</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+        .box {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+        }
 
-<style>
-body { font-family: 'Outfit', sans-serif; background:#0f172a; color:white; padding:20px; }
-h1 { text-align:center; color:#00e5ff; }
+        a {
+            color: gold;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-.card { background:#1e293b; padding:20px; border-radius:10px; margin-bottom:20px; }
-input, select, button {
-    width:100%; padding:10px; margin:5px 0;
-    border-radius:8px; border:none;
-}
-button { background:#00e5ff; font-weight:bold; cursor:pointer; }
-button:hover { opacity:0.8; }
+        ul {
+            text-align: left;
+            margin-top: 20px;
+        }
 
-table { width:100%; border-collapse:collapse; margin-top:10px; }
-td, th { border:1px solid #334155; padding:10px; }
-th { background:#00e5ff; color:black; }
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #334155;
+        }
 
-.hapus { background:#ef4444; color:white; }
-</style>
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: gold;
+            color: black;
+            border-radius: 5px;
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Tugas PHP</h1>
+<div class="box">
 
-<!-- ================= LOOP ================= -->
-<div class="card">
-<h3>Loop 1 - 1000</h3>
-<div style="max-height:200px; overflow:auto;">
+<h2>Dashboard PHP</h2>
+
+<?php if (isset($_SESSION['login'])): ?>
+    <h3>Selamat datang, <?= $_SESSION['login']; ?> 👋</h3>
+    <a href="?logout=true" class="btn">Logout</a>
+<?php else: ?>
+    <p>Anda belum login</p>
+    <a href="index.html" class="btn">Kembali</a>
+<?php endif; ?>
+
+<hr>
+
+<h3>Data User Terdaftar:</h3>
+
+<ul>
 <?php
-for ($i=1;$i<=100;$i++) { // dibatasi 100 biar ringan
-    echo "$i. Ini adalah hari ke-$i belajar PHP <br>";
-}
-?>
-</div>
-</div>
-
-<!-- ================= KALKULATOR ================= -->
-<div class="card">
-<h3>Kalkulator</h3>
-<form method="POST">
-<input type="number" name="a" placeholder="Angka 1" required>
-<input type="number" name="b" placeholder="Angka 2" required>
-<select name="op">
-<option value="+">+</option>
-<option value="-">-</option>
-<option value="*">*</option>
-<option value="/">/</option>
-</select>
-<button name="hitung">Hitung</button>
-</form>
-
-<?php
-if (isset($_POST['hitung'])) {
-    $a=$_POST['a']; $b=$_POST['b']; $op=$_POST['op'];
-
-    switch($op){
-        case '+': $h=$a+$b; break;
-        case '-': $h=$a-$b; break;
-        case '*': $h=$a*$b; break;
-        case '/': $h=$b!=0?$a/$b:"Error"; break;
+if (!empty($_SESSION['users'])) {
+    foreach ($_SESSION['users'] as $user) {
+        echo "<li>{$user['nama']} - {$user['email']}</li>";
     }
-
-    echo "<p>Hasil: $h</p>";
+} else {
+    echo "<li>Belum ada user</li>";
 }
 ?>
-</div>
-
-<!-- ================= LOGIN ================= -->
-<div class="card">
-<h3>Login</h3>
-<form method="POST">
-<input type="text" name="user">
-<input type="password" name="pass">
-<button name="login">Login</button>
-</form>
-
-<?php
-if (isset($_POST['login'])) {
-    $u=$_POST['user']??'';
-    $p=$_POST['pass']??'';
-
-    if (!$u || !$p) {
-        echo "Input kosong!";
-    } elseif ($u=="admin" && $p=="12345") {
-        echo "Login sukses";
-    } else {
-        echo "Login gagal";
-    }
-}
-?>
-</div>
-
-<!-- ================= CRUD ================= -->
-<div class="card">
-<h3>Data Buku</h3>
-
-<table>
-<tr>
-<th>ID</th><th>Judul</th><th>Penulis</th><th>Kategori</th><th>Aksi</th>
-</tr>
-
-<?php foreach($_SESSION['data_buku'] as $b): ?>
-<tr>
-<td><?= $b['id'] ?></td>
-<td><?= $b['judul'] ?></td>
-<td><?= $b['penulis'] ?></td>
-<td><?= $b['kategori'] ?></td>
-<td>
-<form method="POST">
-<input type="hidden" name="id_hapus" value="<?= $b['id'] ?>">
-<button class="hapus" name="hapus_buku">Hapus</button>
-</form>
-</td>
-</tr>
-<?php endforeach; ?>
-
-</table>
-
-<h4>Tambah Buku</h4>
-<form method="POST">
-<input name="judul_baru" placeholder="Judul" required>
-<input name="penulis_baru" placeholder="Penulis" required>
-<input name="kategori_baru" placeholder="Kategori" required>
-<button name="tambah_buku">Tambah</button>
-</form>
+</ul>
 
 </div>
 
